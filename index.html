@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VK Labs - Terminal</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #000;
+        color: #00ff00;
+        font-family: "Courier New", monospace;
+        line-height: 1.6;
+        padding: 2rem;
+        overflow-x: hidden;
+      }
+
+      .terminal {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .ascii-art {
+        color: #00ff00;
+        font-family: monospace;
+        white-space: pre;
+        font-size: 12px;
+        line-height: 1;
+        margin: 20px 0;
+      }
+
+      .blink {
+        animation: blink 1s infinite;
+      }
+
+      @keyframes blink {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .command {
+        color: #00ff00;
+        margin: 20px 0;
+      }
+
+      .command::before {
+        content: "$ ";
+        color: #00ff00;
+      }
+
+      .response {
+        color: #00cc00;
+        margin: 10px 0 20px 20px;
+      }
+
+      .pixel-border {
+        border: 4px solid #00ff00;
+        padding: 20px;
+        margin: 20px 0;
+        position: relative;
+      }
+
+      .pixel-border::after {
+        content: "";
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        width: 8px;
+        height: 8px;
+        background: #00ff00;
+      }
+
+      .project {
+        margin: 10px 0;
+        padding: 10px;
+        border-left: 2px solid #00ff00;
+      }
+
+      .status-mainnet {
+        color: #00ff00;
+      }
+
+      .status-testnet {
+        color: #ffff00;
+      }
+
+      .status-development {
+        color: #ff6600;
+      }
+
+      h1,
+      h2 {
+        font-family: "Press Start 2P", cursive;
+        margin: 20px 0;
+        color: #00ff00;
+      }
+
+      .team-member {
+        margin: 20px 0;
+        padding: 10px;
+        border: 2px solid #00ff00;
+      }
+
+      .pixel-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #000;
+        color: #00ff00;
+        border: 2px solid #00ff00;
+        cursor: pointer;
+        text-decoration: none;
+        font-family: "Press Start 2P", cursive;
+        font-size: 12px;
+        margin: 10px 0;
+      }
+
+      .pixel-btn:hover {
+        background: #00ff00;
+        color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="terminal">
+      <div class="command">login --as guest</div>
+      <div class="response">Access granted. Welcome to VK Labs Terminal...</div>
+
+      <div class="command">cat mission.txt</div>
+      <div class="response pixel-border">
+        MISSION OBJECTIVES: [*] Make financial services accessible to all [*]
+        Empower entrepreneurs through digital assets [*] Establish trust via
+        cryptographic verification
+      </div>
+
+      <div class="command">ls projects/</div>
+      <div class="response">
+        <div class="project">
+          > CasperDash <span class="status-mainnet">[MAINNET]</span>
+          └─ Most popular non-custodial wallet on Casper blockchain
+        </div>
+        <div class="project">
+          > EggForce <span class="status-mainnet">[MAINNET]</span>
+          └─ First dynamic NFT Project on Casper Blockchain
+        </div>
+        <div class="project">
+          > Melem <span class="status-testnet">[TESTNET]</span>
+          └─ Next-gen branded NFT programs
+        </div>
+        <div class="project">
+          > FoodVisionAI <span class="status-development">[DEV]</span>
+          └─ AI food quality control
+        </div>
+        <div class="project">
+          > VyVyRobot <span class="status-development">[DEV]</span>
+          └─ Restaurant automation system
+        </div>
+      </div>
+
+      <div class="command">cat team.txt</div>
+      <div class="response">
+        <div class="team-member">
+          [CTO] Kenny └─ General management & technical decisions └─ Contact:
+          /msg <a href="https://t.me/kennykkk">Kenny</a>
+        </div>
+        <div class="team-member">
+          [CMO] GP └─ Marketing strategy & business development └─ Contact: /msg
+          <a href="https://t.me/oxIGP">GP</a>
+        </div>
+        <div class="team-member">
+          [COO] Darren └─ Product operations & feature deployment └─ Contact:
+          /msg <a href="https://t.me/Kamelot89">Darren</a>
+        </div>
+      </div>
+
+      <div class="command">contact --init</div>
+      <div class="response">
+        <a href="mailto:business@vklabs.tech" class="pixel-btn"
+          >INITIALIZE COMMUNICATION PROTOCOL</a
+        >
+      </div>
+
+      <div class="command">company-info --show</div>
+      <div class="response">
+        <div class="pixel-border">
+          [COMPANY]: VK Labs Limited [ADDRESS]: Suite C, Level 7, World Trust
+          Tower 50 Stanley Street, Central Hong Kong
+        </div>
+      </div>
+
+      <div class="command">exit</div>
+      <div class="response">
+        Session terminated. Thank you for visiting VK Labs.
+        <span class="blink">_</span>
+      </div>
+    </div>
+
+    <script>
+      // Simulated typing effect
+      document.addEventListener("DOMContentLoaded", () => {
+        const responses = document.querySelectorAll(".response");
+        responses.forEach((response) => {
+          response.style.display = "none";
+        });
+
+        let delay = 0;
+        const commands = document.querySelectorAll(".command");
+        commands.forEach((command, index) => {
+          setTimeout(() => {
+            command.style.opacity = "1";
+            setTimeout(() => {
+              responses[index].style.display = "block";
+            }, 500);
+          }, delay);
+          delay += 1000;
+        });
+      });
+    </script>
+  </body>
+</html>
